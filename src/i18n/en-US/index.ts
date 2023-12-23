@@ -2,6 +2,16 @@
 // so you can safely delete all default props below
 
 export default {
-  failed: 'Action failed',
-  success: 'Action was successful'
+  Common: {
+    Profile: 'Profile',
+    Logout: 'Logout',
+    Filters: 'Filters',
+    AllItems: 'All items',
+  },
+  Dashboard: {
+    Title: 'Dashboard page title',
+  },
+  Profile: {
+    Title: 'Profile page title',
+  },
 };

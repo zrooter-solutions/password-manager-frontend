@@ -3,8 +3,18 @@ import { RouteRecordRaw } from 'vue-router';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
+    redirect: 'dashboard',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
+    children: [
+      {
+        path: '/dashboard',
+        component: () => import('pages/DashboardPage.vue'),
+      },
+      {
+        path: '/profile',
+        component: () => import('pages/ProfilePage.vue'),
+      },
+    ],
   },
 
   // Always leave this as last one,
