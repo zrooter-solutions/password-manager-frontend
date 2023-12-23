@@ -2,101 +2,78 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-
         <q-toolbar-title>
-          Quasar App
+          <q-btn @click="router.push('/dashboard')" round flat>
+            <q-avatar size="26px">
+              <img src="src/assets/logo.png" />
+            </q-avatar>
+          </q-btn>
         </q-toolbar-title>
+        <div class="q-gutter-sm row items-center no-wrap">
+          <q-btn round flat>
+            <q-avatar size="26px">
+              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+            </q-avatar>
+            <q-menu>
+              <q-list style="min-width: 100px">
+                <q-item clickable v-ripple @click="router.push('/profile')">
+                  <q-item-section avatar center>
+                    <q-avatar size="24px">
+                      <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+                    </q-avatar>
+                  </q-item-section>
 
-        <div>Quasar v{{ $q.version }}</div>
+                  <q-item-section>
+                    <q-item-label>{{ $t('Common.Profile') }}</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-ripple>
+                  <q-item-section avatar center>
+                    <q-avatar size="24px">
+                      <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+                    </q-avatar>
+                  </q-item-section>
+
+                  <q-item-section>
+                    <q-item-label>{{ $t('Common.Logout') }}</q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-menu>
+          </q-btn>
+        </div>
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
+    <q-page-container class="bg-grey-2">
+      <div class="row q-pa-md">
+        <div class="col-12 col-md-3">
+          <q-card bordered>
+            <q-card-section class="bg-grey-4">
+              <div class="text-bold">{{ $t('Common.Profile') }}</div>
+            </q-card-section>
 
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
+            <q-separator />
 
-    <q-page-container>
-      <router-view />
+            <q-card-section> {{ $t('Common.AllItems') }} </q-card-section>
+          </q-card>
+        </div>
+        <div class="col-12 col-md-9 q-px-xl">
+          <router-view />
+        </div>
+      </div>
     </q-page-container>
   </q-layout>
 </template>
-
 <script setup lang="ts">
-import { ref } from 'vue';
-import EssentialLink, { EssentialLinkProps } from 'components/EssentialLink.vue';
+import { useRouter } from 'vue-router';
 
-const essentialLinks: EssentialLinkProps[] = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-];
-
-const leftDrawerOpen = ref(false)
-
-function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value
-}
+const router = useRouter();
 </script>
+<style lang="scss" scoped>
+.q-toolbar,
+.bg-grey-2 .row {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+</style>
